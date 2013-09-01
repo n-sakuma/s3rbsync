@@ -7,13 +7,15 @@ module S3rbsync
     desc 'init', "Set up S3rbsync. (ganerate configure)"
     def init
       if yes? "Do you wish to continue [yes(y) / no(n)] ?", :cyan
-        access_key = ask("aws_access_key:")
-        secret_key = ask("aws_secret_access_key:")
+        access_key  = ask("aws_access_key:")
+        secret_key  = ask("aws_secret_access_key:")
+        bucket_name = ask("bucket_name:")
         create_file "~/.aws.yml" do
-          <<-"STR"
-aws_access_key:         #{access_key}
-aws_secret_access_key:  #{secret_key}
-          STR
+          <<-"YAML"
+:aws_access_key:         #{access_key}
+:aws_secret_access_key:  #{secret_key}
+:bucket_name:            #{bucket_name}
+          YAML
         end
       else
         puts "...exit"
