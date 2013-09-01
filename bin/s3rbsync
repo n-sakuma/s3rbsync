@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+# encoding: utf-8
+
+require 's3rbsync'
+
+S3rbsync.cli_start
+
+# vim: ft=ruby
