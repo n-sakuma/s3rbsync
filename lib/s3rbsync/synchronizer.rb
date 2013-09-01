@@ -3,8 +3,9 @@ require 'fog'
 module S3rbsync
   class Synchronizer
 
-    def initialize(configure)
+    def initialize(configure, directory = nil)
       @configure = configure
+      @sync_dir = directory
       @s3= Fog::Storage.new(:provider              => 'AWS',
                             :aws_access_key_id     => @configure.access_key,
                             :aws_secret_access_key => @configure.secret_key,

@@ -19,6 +19,10 @@ module S3rbsync
       end
     end
 
+    def valid?
+      valid_yaml_file? and connected?
+    end
+
     def valid_yaml_file?
       @error_message.nil? and @access_key and @secret_key and @bucket_name
     end

@@ -24,6 +24,16 @@ module S3rbsync
       end
     end
 
+    desc 'sync', "Synchronize files to S3."
+    method_option :directory, :type => :string, :aliases => "-d"
+    def sync
+      conf = S3rbsync::Configure.new
+      unless conf.valid?
+        say "Sync failed!", :red
+        exit 1
+      end
+    end
+
     desc 'test', "The connection test to AWS."
     def test
       say "\nChecking config...\n", :cyan
