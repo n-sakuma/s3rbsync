@@ -20,6 +20,20 @@ aws_secret_access_key:  #{secret_key}
       end
     end
 
+    desc 'test', "The connection test to AWS."
+    def test
+      say "\nChecking config...\n", :cyan
+      conf = S3rbsync::Configure.new
+      print "Config file: "
+      if conf.valid_yaml_file?
+        say "OK\n", :green
+      else
+        say "NG\n", :red
+        say "\n...Done\n", :cyan
+        exit 1
+      end
+    end
+
     desc 'hello', "say hello."
     def hello
       puts "hello s3rbsync world"
