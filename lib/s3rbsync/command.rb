@@ -9,7 +9,7 @@ module S3rbsync
       if yes? "Do you wish to continue [yes(y) / no(n)] ?", :cyan
         access_key  = ask("aws_access_key:")
         secret_key  = ask("aws_secret_access_key:")
-        region       = ask("regin:")
+        region      = ask("regin:")
         bucket_name = ask("bucket_name:")
         create_file "~/.aws.yml" do
           <<-"YAML"
@@ -46,11 +46,6 @@ module S3rbsync
         say "  -> Connection falid: Chack config file, or 's3rbsync init'", :yellow
       end
       say "\n...Done\n", :cyan
-    end
-
-    desc 'hello', "say hello."
-    def hello
-      puts "hello s3rbsync world"
     end
 
   end
