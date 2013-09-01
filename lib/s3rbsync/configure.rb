@@ -21,5 +21,10 @@ module S3rbsync
     def valid_yaml_file?
       @error_message.nil? and @access_key and @secret_key and @bucket_name
     end
+
+    def connected?
+      s3 = S3rbsync::Synchronizer.new(self)
+      s3.connected?
+    end
   end
 end

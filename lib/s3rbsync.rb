@@ -1,6 +1,7 @@
 require "s3rbsync/version"
 require "s3rbsync/command"
 require "s3rbsync/configure"
+require "s3rbsync/synchronizer"
 
 module S3rbsync
   def self.cli_start

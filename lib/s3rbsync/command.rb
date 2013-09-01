@@ -34,6 +34,16 @@ module S3rbsync
         say "\n...Done\n", :cyan
         exit 1
       end
+
+      print "Test connection: "
+      if conf.connected?
+        say "OK", :green
+        #...
+      else
+        say "NG", :red
+        say "  -> Connection falid: Chack config file, or 's3rbsync init'", :yellow
+      end
+      say "\n...Done\n", :cyan
     end
 
     desc 'hello', "say hello."
