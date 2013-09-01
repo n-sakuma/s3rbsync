@@ -8,7 +8,7 @@ module S3rbsync
       @s3= Fog::Storage.new(:provider              => 'AWS',
                             :aws_access_key_id     => @configure.access_key,
                             :aws_secret_access_key => @configure.secret_key,
-                            :region                => 'ap-northeast-1',  # TODO: get configre
+                            :region                => (@configure.region || 'ap-northeast-1'),
                             :persistent            => false )
     end
 
