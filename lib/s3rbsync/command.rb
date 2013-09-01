@@ -9,11 +9,13 @@ module S3rbsync
       if yes? "Do you wish to continue [yes(y) / no(n)] ?", :cyan
         access_key  = ask("aws_access_key:")
         secret_key  = ask("aws_secret_access_key:")
+        region       = ask("regin:")
         bucket_name = ask("bucket_name:")
         create_file "~/.aws.yml" do
           <<-"YAML"
 :aws_access_key:         #{access_key}
 :aws_secret_access_key:  #{secret_key}
+:regin:                  #{region}
 :bucket_name:            #{bucket_name}
           YAML
         end
