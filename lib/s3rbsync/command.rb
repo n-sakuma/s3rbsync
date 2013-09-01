@@ -32,6 +32,8 @@ module S3rbsync
         say "Sync failed!", :red
         exit 1
       end
+      synchronizer = S3rbsync::Synchronizer.new(conf, options[:directory])
+      synchronizer.sync!
     end
 
     desc 'test', "The connection test to AWS."

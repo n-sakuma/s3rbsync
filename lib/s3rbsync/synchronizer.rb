@@ -20,5 +20,14 @@ module S3rbsync
     else
       true
     end
+
+    def sync!
+      say "Sync start...", :cyan
+      # ...
+      # puts "sync_dir", @sync_dir
+      # puts "cofig---"
+      # p @configure
+      say "...finish.", :cyan
+    end
   end
 end
