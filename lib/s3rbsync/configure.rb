@@ -3,10 +3,10 @@ require 'yaml'
 module S3rbsync
   class Configure
     CONF_FILE = "#{ENV["HOME"]}/.aws.yml"
-    attr_accessor :access_key, :secret_key, :bucket_name
+    attr_accessor :access_key, :secret_key, :bucket_name, :region
 
     def initialize
-      @access_key = @secret_key = @bucket_name = @error_message = nil
+      @access_key = @secret_key = @bucket_name = @error_message = @region = nil
       begin
         @conf = YAML.load_file CONF_FILE
       rescue => e
@@ -15,6 +15,7 @@ module S3rbsync
         @access_key  = @conf[:aws_access_key]
         @secret_key  = @conf[:aws_secret_access_key]
         @bucket_name = @conf[:bucket_name]
+        @region      = @conf[:region]
       end
     end
 
