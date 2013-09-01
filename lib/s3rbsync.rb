@@ -3,5 +3,7 @@ require "s3rbsync/command"
 require "s3rbsync/configure"
 
 module S3rbsync
-  # Your code goes here...
+  def self.cli_start
+    S3rbsync::Command.start
+  end
 end

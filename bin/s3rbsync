@@ -3,6 +3,6 @@
 
 require 's3rbsync'
 
-S3rbsync::Command.start
+S3rbsync.cli_start
 
 # vim: ft=ruby
