@@ -5,20 +5,21 @@ module S3rbsync
 
     def initialize(configure, directory = nil)
       @configure = configure
-      @sync_dir = directory
-      @s3= Fog::Storage.new(:provider              => 'AWS',
-                            :aws_access_key_id     => @configure.access_key,
-                            :aws_secret_access_key => @configure.secret_key,
-                            :region                => (@configure.region || 'ap-northeast-1'),
-                            :persistent            => false )
+      @local_dir = directory
+      @s3 = Fog::Storage.new(:provider              => 'AWS',
+                             :aws_access_key_id     => @configure.access_key,
+                             :aws_secret_access_key => @configure.secret_key,
+                             :region                => (@configure.region || 'ap-northeast-1'),
+                             :persistent            => false )
+      @bucket = @s3.directories.get(@configure.bucket_name)
+    rescue => e
+      puts "----- Error -----"
+      puts e.message
+      exit 1
     end
 
     def connected?
-      @s3.get_bucket(@configure.bucket_name)
-    rescue
-      false
-    else
-      true
+      !!@bucket
     end
 
     def sync!
