@@ -1,8 +1,5 @@
 source 'https://rubygems.org'
 
-gem 'thor'
-gem 'fog'
-
 group :development do
   gem "pry-debugger"
 end

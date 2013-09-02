@@ -1,6 +1,7 @@
-# S3rbsync
+# s3rbsync
 
-TODO: Write a gem description
+このライブラリを使うことで、特定のディレクトリをS3に同期させることができます。
+This library save to S3 in the AWS file in the directory specific.
 
 ## Installation
 
@@ -18,7 +19,38 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+### Overview
+
+```bash
+$ s3rbsync
+Commands:
+  s3rbsync help [COMMAND]  # Describe available commands or one specific command
+  s3rbsync init            # Set up S3rbsync. (ganerate configure)
+  s3rbsync sync            # Synchronize files to S3.
+  s3rbsync test            # The connection test to AWS.
+```
+
+### First step
+
+```bash
+$ s3rbsync init
+```
+
+### Connection Test
+
+```bash
+$ s3rbsync test
+```
+
+### Sync
+
+```bash
+ex.)
+$ s3rbsync sync -d /var/backups
+
+# Options:
+#   -d, [--directory=DIRECTORY]  # Default: ./   (current directory)
+```
 
 ## Contributing
 
