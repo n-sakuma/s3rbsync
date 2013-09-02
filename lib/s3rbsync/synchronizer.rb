@@ -12,6 +12,7 @@ module S3rbsync
                              :region                => (@configure.region || 'ap-northeast-1'),
                              :persistent            => false )
       @bucket = @s3.directories.get(@configure.bucket_name)
+      @queue = Queue.new
     rescue => e
       puts "----- Error -----"
       puts e.message
@@ -31,13 +32,23 @@ module S3rbsync
     private
 
     def upload_files(dir)
-      Dir.entries(@local_dir).each do |file|
+      upload_in_directory(dir)
+      recursive_upload
+    end
+
+    def recursive_upload
+      upload_in_directory(@queue.pop, :recursible => true) until @queue.empty?
+    end
+
+    def upload_in_directory(dir, options={})
+      Dir.entries(dir).each do |file|
         next if file.start_with?('.')
 
-        if File.directory?(file)
-          # TODO
+        file_name = options[:recursible] ? File.join(dir, file) : file
+        if File.directory?(file_name)
+          @queue.push(file_name)
         else
-          upload!(file)
+          upload!(file_name)
         end
       end
     end
