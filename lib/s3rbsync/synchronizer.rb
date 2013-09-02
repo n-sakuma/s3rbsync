@@ -45,7 +45,7 @@ module S3rbsync
     def upload_file(file_name)
       remote_file = get_remote_file(file_name)
       return if remote_file && (not modified?(file_name, remote_file))
-      destroy_file(remote_file) if remote_file && modified?(file_name, remote_file)
+      remote_file.destroy if remote_file && modified?(file_name, remote_file)
       @bucket.files.create(:key => "#{file_name}", :body => open(file_name), :public => false)
       puts "copied #{file_name}"
     end
@@ -58,12 +58,6 @@ module S3rbsync
       # puts "verifying file: #{local_file}"
       return true unless remote_file
       File.mtime(local_file) > remote_file.last_modified
-    end
-
-    def destroy_file remote_file
-      return unless remote_file
-      remote_file.destroy
-      # puts "delete on s3 #{remote_file.key}"
     end
 
   end
