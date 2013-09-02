@@ -25,7 +25,7 @@ module S3rbsync
     end
 
     desc 'sync', "Synchronize files to S3."
-    method_option :directory, :type => :string, :aliases => "-d"
+    method_option :directory, :type => :string, :aliases => "-d", :default => "./"
     def sync
       conf = S3rbsync::Configure.new
       unless conf.valid?
@@ -54,6 +54,7 @@ module S3rbsync
       print "Test connection: "
       if conf.connected?
         say "OK", :green
+        #]...
       else
         say "NG", :red
         say "  -> Connection falid: Chack config file, or 's3rbsync init'", :yellow
