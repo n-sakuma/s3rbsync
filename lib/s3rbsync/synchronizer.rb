@@ -24,25 +24,25 @@ module S3rbsync
 
     def sync!
       # puts '...call sync!'
-      upload_directory(@local_dir)
+      upload_files(@local_dir)
     end
 
 
     private
 
-    def upload_directory(dir)
+    def upload_files(dir)
       Dir.entries(@local_dir).each do |file|
         next if file.start_with?('.')
 
         if File.directory?(file)
           # TODO
         else
-          upload_file(file)
+          upload!(file)
         end
       end
     end
 
-    def upload_file(file_name)
+    def upload!(file_name)
       remote_file = get_remote_file(file_name)
       return if remote_file && (not modified?(file_name, remote_file))
       remote_file.destroy if remote_file && modified?(file_name, remote_file)
